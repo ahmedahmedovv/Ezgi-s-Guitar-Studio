@@ -1,0 +1,545 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+    color: #fff;
+}
+
+.app {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 30px 0;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    color: #e94560;
+    text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+}
+
+.subtitle {
+    color: #aaa;
+    margin-top: 5px;
+}
+
+/* Section Styles */
+section {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+    color: #fff;
+}
+
+/* Metronome Styles */
+.bpm-display {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#bpm-value {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #e94560;
+    text-shadow: 0 0 30px rgba(233, 69, 96, 0.5);
+}
+
+.bpm-label {
+    display: block;
+    font-size: 1rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.bpm-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.btn-round {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #e94560;
+    background: transparent;
+    color: #e94560;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-round:hover {
+    background: #e94560;
+    color: #fff;
+}
+
+#bpm-slider {
+    width: 200px;
+    height: 8px;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    outline: none;
+}
+
+#bpm-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    background: #e94560;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+}
+
+.time-signature {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.time-signature label {
+    margin-right: 10px;
+    color: #aaa;
+}
+
+.time-signature select {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.beat-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.beat {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.1s;
+}
+
+.beat.active {
+    background: #e94560;
+    box-shadow: 0 0 20px #e94560;
+    transform: scale(1.3);
+}
+
+.beat.accent {
+    background: #ffd700;
+    box-shadow: 0 0 20px #ffd700;
+}
+
+.btn-play {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e94560 0%, #c23a51 100%);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.btn-play:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+}
+
+.btn-play.playing {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+}
+
+/* Backing Tracks Styles */
+.track-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.track {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+}
+
+.track:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #e94560;
+}
+
+.track.playing {
+    background: rgba(233, 69, 96, 0.2);
+    border-color: #e94560;
+}
+
+.track-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.track-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.track-details {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.btn-track-play {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #e94560;
+    background: transparent;
+    color: #e94560;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-track-play:hover {
+    background: #e94560;
+    color: #fff;
+}
+
+.track-controls {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+}
+
+.now-playing {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #aaa;
+}
+
+#current-track-name {
+    color: #e94560;
+    font-weight: bold;
+}
+
+.playback-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-control {
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-control:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#volume-slider {
+    width: 100px;
+    height: 6px;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volume-label {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+/* Chord Library Styles */
+.chord-categories {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.chord-cat-btn {
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    background: transparent;
+    color: #aaa;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.chord-cat-btn:hover {
+    border-color: #e94560;
+    color: #fff;
+}
+
+.chord-cat-btn.active {
+    background: #e94560;
+    border-color: #e94560;
+    color: #fff;
+}
+
+.chord-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.chord-btn {
+    padding: 12px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.chord-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #e94560;
+}
+
+.chord-btn.active {
+    background: rgba(233, 69, 96, 0.3);
+    border-color: #e94560;
+    color: #e94560;
+}
+
+.chord-btn .chord-label {
+    display: block;
+    font-size: 1.1rem;
+}
+
+.chord-btn .chord-sublabel {
+    display: block;
+    font-size: 0.7rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+.chord-display {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.chord-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.chord-header h3 {
+    font-size: 1.8rem;
+    color: #e94560;
+}
+
+.chord-type {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.fretboard {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.fretboard svg {
+    max-width: 100%;
+}
+
+.chord-info {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.finger-positions {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.chord-tips {
+    color: #888;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.chord-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-chord-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: 2px solid #e94560;
+    border-radius: 10px;
+    background: transparent;
+    color: #e94560;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.btn-chord-action:hover {
+    background: #e94560;
+    color: #fff;
+}
+
+/* Chord Trainer */
+.chord-trainer {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+.chord-trainer h3 {
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.trainer-description {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.trainer-settings {
+    margin-bottom: 20px;
+}
+
+.trainer-settings label {
+    color: #aaa;
+}
+
+.trainer-settings select {
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.trainer-display {
+    margin-bottom: 20px;
+}
+
+.trainer-chord {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #e94560;
+    text-shadow: 0 0 30px rgba(233, 69, 96, 0.5);
+    display: block;
+    animation: none;
+}
+
+.trainer-chord.flash {
+    animation: chordFlash 0.3s ease;
+}
+
+@keyframes chordFlash {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .app {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    #bpm-value {
+        font-size: 3rem;
+    }
+
+    #bpm-slider {
+        width: 150px;
+    }
+}
