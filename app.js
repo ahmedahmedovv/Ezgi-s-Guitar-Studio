@@ -917,6 +917,10 @@ const chordTrainer = {
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize chord library and trainer
+    chordLibrary.init();
+    chordTrainer.init();
+
     // Metronome controls
     document.getElementById('metronome-toggle').addEventListener('click', () => {
         metronome.toggle();
